@@ -1,0 +1,25 @@
+{
+  "name": "ctfbotv2",
+  "version": "1.0.0",
+  "description": "Another CTF hosting bot, though a solo oriented version this time!",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmrPaper/CTFbotV2.git"
+  },
+  "author": "Paper",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmrPaper/CTFbotV2/issues"
+  },
+  "homepage": "https://github.com/AmrPaper/CTFbotV2#readme",
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
+    "node": "^22.11.0",
+    "nodemon": "^3.1.7"
+  }
+}
