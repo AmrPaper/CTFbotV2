@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import userProgressSchema from "./user-progress-schema.js";
 import { config } from "dotenv";
 
-const flags = {"phase 1": "bruh", "phase 2": "amogus", "phase 3": "sus"};
+const flags = {"phase 1": "bruh", "phase 2": "daz", "phase 3": "sus"};
 
 async function submitFlag(msg, args) {
     mongoose.connect(process.env.MONGODB_URI);
@@ -46,9 +46,7 @@ async function submitFlag(msg, args) {
         };
     } catch (error) {
         console.log(`Error: ${error}`);
-    } finally {
-        await mongoose.disconnect();
-    }    
+    }  
 }
 
 export { submitFlag };
