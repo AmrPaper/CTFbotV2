@@ -1,4 +1,7 @@
 import {Client, IntentsBitField, ActivityType} from "discord.js";
+import {mongoose} from "mongoose";
+import userProgressSchema from "./user-progress-schema.js";
+import { submitFlag } from "./progress-tracking.js";
 import { config } from "dotenv";
 const prefix = "!";
 
@@ -20,9 +23,12 @@ client.on("ready", (c) => {
         name: "الليلة بالليل 🌙",
         type: ActivityType.Listening,
     });
+
+    mongoose.connect(process.env.MONGODB_URI);
 });
 
 const commandHandlers = {
+    "submit-flag": submitFlag,
     "bloop": (msg) => {
         console.log(msg.author);
         msg.reply("User info logged!");
@@ -31,6 +37,32 @@ const commandHandlers = {
         console.log(msg.member.roles.cache.map(r => r.name));
         msg.reply("User roles logged!");
     },
+    "ctf-begin": async (msg) => {
+        await userProgressSchema.findOneAndUpdate({
+            _id: msg.author.id
+        }, {
+            _id: msg.author.id,
+            name: msg.author.globalName,
+            "phase 1": false,
+            "phase 2": false,
+            "phase 3": false,
+        }, {
+            upsert: true
+        });
+        
+        const role = await msg.guild.roles.cache.find((role) => role.name === "ctf");
+        
+        if (role) {
+            try {
+                const member = await msg.guild.members.fetch(msg.author.id);
+                await member.roles.add(role);
+                console.log(`${msg.author.globalName} has joined the ctf!`);
+            } catch (error) {
+                console.log(`Error: ${error}`);
+            }
+        }
+        msg.reply("User registered successfully!");
+    }
 };
 
 //running different commands depending on the user's input
