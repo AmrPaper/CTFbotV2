@@ -3,11 +3,23 @@ import userProgressSchema from "./user-progress-schema.js";
 import { config } from "dotenv";
 
 const flags = {"phase 1": "bruh", "phase 2": "daz", "phase 3": "sus"};
+var i = 0;
+
+async function checkPhase(msg, args) {
+    mongoose.connect(process.env.MONGODB_URI);
+    const playerID = await msg.author.id;
+
+    if (playerID) {
+        let player = await userProgressSchema.findOne({playerID}).cursor();
+        console.log(player);
+    }
+}
 
 async function submitFlag(msg, args) {
     mongoose.connect(process.env.MONGODB_URI);
     const player = await msg.author.globalName;
     const usrRoles = await msg.member.roles.cache.map(r => r.name);
+    i = 0;
 
     try {
         if (usrRoles.includes("ctf" == false)) {
@@ -18,6 +30,7 @@ async function submitFlag(msg, args) {
                     const usrSubmission = args[0];
 
                     for (const [stage, flag] of Object.entries(flags)) {
+                        i++;
                         if (flag == usrSubmission) {
                             try {
                                 const updatePhase = {};
@@ -49,4 +62,4 @@ async function submitFlag(msg, args) {
     }  
 }
 
-export { submitFlag };
+export { submitFlag, checkPhase };

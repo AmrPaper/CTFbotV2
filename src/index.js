@@ -1,7 +1,7 @@
 import {Client, IntentsBitField, ActivityType} from "discord.js";
 import {mongoose} from "mongoose";
 import userProgressSchema from "./user-progress-schema.js";
-import { submitFlag } from "./progress-tracking.js";
+import { submitFlag, checkPhase } from "./progress-tracking.js";
 import { config } from "dotenv";
 const prefix = "!";
 
@@ -28,6 +28,7 @@ client.on("ready", (c) => {
 });
 
 const commandHandlers = {
+    "check": checkPhase,
     "submit-flag": submitFlag,
     "bloop": (msg) => {
         console.log(msg.author);
