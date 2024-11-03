@@ -11,16 +11,9 @@ const userProgressSchema = new Schema({
         type: String,
         require: true
     },
-    "phase 1": {
-        type: Boolean,
-        require: true
-    },
-    "phase 2": {
-        type: Boolean,
-        require: true
-    },
-    "phase 3": {
-        type: Boolean,
+    currentPhase: {
+        type: Number,
+        default: 1,
         require: true
     }
 });
