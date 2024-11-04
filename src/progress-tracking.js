@@ -3,7 +3,12 @@ import userProgressSchema from "./user-progress-schema.js";
 import { config } from "dotenv";
 
 const flags = {"1": "bruh", "2": "daz", "3": "sus"};
-var i = 0;
+
+async function checkPhase(msg) {
+    mongoose.connect(process.env.MONGODB_URI);
+    const player = await userProgressSchema.findOne({ _id: msg.author.id});
+    return player ? player.currentPhase : console.log("User not found.");
+}
 
 async function submitFlag(msg, args) {
     mongoose.connect(process.env.MONGODB_URI);
@@ -70,4 +75,4 @@ async function submitFlag(msg, args) {
     }  
 }
 
-export { submitFlag };
+export { submitFlag, checkPhase };

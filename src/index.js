@@ -2,6 +2,8 @@ import {Client, IntentsBitField, ActivityType} from "discord.js";
 import {mongoose} from "mongoose";
 import { join, reset, leave } from "./register.js";
 import { submitFlag } from "./progress-tracking.js";
+import { welcome, intro, help } from "./commands.js";
+import { phase1, phase2, phase3 } from "./challenges.js";
 import { config } from "dotenv";
 const prefix = "!";
 
@@ -29,9 +31,15 @@ client.on("ready", (c) => {
 
 const commandHandlers = {
     "submit-flag": submitFlag,
+    "welcome": welcome,
+    "intro":intro,
+    "help": help,
     "join": join,
     "reset": reset,
     "leave": leave,
+    "phase1": phase1,
+    "phase2": phase2,
+    "phase3": phase3,
     "bloop": (msg) => {
         console.log(msg.author);
         msg.reply("User info logged!");
