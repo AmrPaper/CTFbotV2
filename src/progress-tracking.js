@@ -5,38 +5,39 @@ import { config } from "dotenv";
 const flags = {"1": "bruh", "2": "daz", "3": "sus"};
 var i = 0;
 
-async function checkPhase(msg, phase) {
-    mongoose.connect(process.env.MONGODB_URI);
-    const playerID = await msg.author.id;
-
-    if (playerID) {
-        let player = await userProgressSchema.findOne({ _id: playerID });
-        
-        if(player) {
-            return player.currentPhase === Number(phase);
-        } else {
-            console.log("Player not found");
-            return false;
-        }
-    }
-}
-
 async function submitFlag(msg, args) {
     mongoose.connect(process.env.MONGODB_URI);
-    const player = await msg.author.globalName;
+    const playerName = await msg.author.globalName;
     const usrRoles = await msg.member.roles.cache.map(r => r.name);
+    const playerID = await msg.author.id;
+    let phaseValid = false;
 
     try {
         if (usrRoles.includes("ctf" == false)) {
             msg.reply("You are not participating in the ongoing CTF, please contact Paper for assistance!");
         } else {
-            if (player) {
+            if (playerName) {
                 if (args.length > 0) {
                     const usrSubmission = args[0];
 
                     for (const [stage, flag] of Object.entries(flags)) {
                         if (flag == usrSubmission) {
-                            const phaseValid = await checkPhase(msg, stage)
+                            if (playerID) {
+                                let player = await userProgressSchema.findOne({ _id: playerID });
+                                
+                                if(player) {
+                                    if (player.currentPhase > Number(stage)) {
+                                        msg.reply("You've already completed this phase. Please move on to the next.");
+                                        return;
+                                    } else {
+                                        phaseValid = player.currentPhase === Number(stage);
+                                    }
+                                } else {
+                                    console.log("Player not found");
+                                    return;
+                                }
+                            }
+                            
                             if (phaseValid) {
                                 try {
                                     const nextPhase = Number(stage) + 1;
@@ -69,4 +70,4 @@ async function submitFlag(msg, args) {
     }  
 }
 
-export { submitFlag, checkPhase };
+export { submitFlag };
