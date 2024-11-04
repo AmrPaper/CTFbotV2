@@ -1,6 +1,6 @@
 import {Client, IntentsBitField, ActivityType} from "discord.js";
 import {mongoose} from "mongoose";
-import { join, reset, leave } from "./register.js";
+import { join, reset, leave, remove } from "./register.js";
 import { submitFlag } from "./progress-tracking.js";
 import { welcome, intro, help } from "./commands.js";
 import { phase1, phase2, phase3 } from "./challenges.js";
@@ -32,6 +32,7 @@ client.on("ready", (c) => {
 const commandHandlers = {
     "submit-flag": submitFlag,
     "welcome": welcome,
+    "remove": remove,
     "intro":intro,
     "help": help,
     "join": join,
