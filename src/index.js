@@ -1,8 +1,8 @@
 import {Client, IntentsBitField, ActivityType} from "discord.js";
 import {mongoose} from "mongoose";
-import { join, reset, leave, remove } from "./register.js";
+import { join, reset, leave, remove, add } from "./register.js";
 import { submitFlag } from "./progress-tracking.js";
-import { welcome, intro, help } from "./commands.js";
+import { welcome, intro, help, init } from "./commands.js";
 import { phase1, phase2, phase3 } from "./challenges.js";
 import { config } from "dotenv";
 const prefix = "!";
@@ -33,6 +33,8 @@ const commandHandlers = {
     "submit-flag": submitFlag,
     "welcome": welcome,
     "remove": remove,
+    "add": add,
+    "init": init,
     "intro":intro,
     "help": help,
     "join": join,
@@ -48,6 +50,12 @@ const commandHandlers = {
     "blip": (msg) => {
         console.log(msg.member.roles.cache.map(r => r.name));
         msg.reply("User roles logged!");
+    },
+    "maktab": (msg) => {
+        msg.reply("Ya5 itta makana ya5");
+    },
+    "daz": (msg) => {
+        msg.reply("Sheeel min hinaa!!!");
     },
 };
 

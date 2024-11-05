@@ -69,4 +69,53 @@ function intro(msg) {
     msg.channel.send({embeds: [storyIntro]});
 };
 
-export { welcome, intro, help };
+async function init(msg) {
+    const member = await msg.guild.members.fetch(msg.author.id);
+
+    if (member.permissions.has("ADMINISTRATOR")) {
+        try {
+            const ctf = await msg.guild.roles.cache.find((role) => role.name === "ctf");
+            const organiser = await msg.guild.roles.cache.find((role) => role.name === "organiser");
+    
+            if (!ctf && !organiser) {
+                await msg.guild.roles.create({
+                    name: 'ctf',
+                    color: '#0000FF',
+                    mentionable: true,
+                });
+    
+                await msg.guild.roles.create({
+                    name: 'organiser',
+                    color: '#FF0000',
+                    mentionable: true,
+                });
+                
+                msg.reply("CTF and Organiser roles successfully created!");
+            } else if (!ctf && organiser) {
+                await msg.guild.roles.create({
+                    name: 'ctf',
+                    color: '0000FF',
+                    mentionable: true,
+                });
+                msg.reply("CTF role successfully created!");
+            } else if (ctf && !organiser) {
+                await msg.guild.roles.create({
+                    name: 'organiser',
+                    color: 'FF0000',
+                    mentionable: true,
+                });
+                msg.reply("Organiser role successfully created!");
+            } else {
+                msg.reply("CTF and Organiser roles both already exist");
+            }
+        } catch (error) {
+            console.log(`Error: ${error}`);
+            msg.reply("There was an error creating the roles, please try again.");
+        }
+    } else {
+        msg.reply("You do not have permission to initialise the bot.");
+    }
+    
+}
+
+export { welcome, intro, help, init };

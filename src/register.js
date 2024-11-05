@@ -72,7 +72,9 @@ async function leave(msg) {
 }
 
 async function remove(msg, args) {
-    if (msg.author.id === process.env.Paper_ID) {
+    const sender = await msg.guild.members.fetch(msg.author.id);
+    const senderRoles = msg.member.roles.cache.map(r => r.name);
+    if (senderRoles.includes("organiser") || sender.permissions.has("ADMINISTRATOR")) {
         let id = args[0].match(/\d+/)[0];
         const userExists = await checkUsers(id);
 
@@ -82,9 +84,8 @@ async function remove(msg, args) {
         
             if (role) {
                 try {
-                    const member = await msg.guild.members.fetch(msg.author.id);
+                    const member = await msg.guild.members.fetch(id);
                     await member.roles.remove(role);
-                    console.log(`${msg.author.globalName} has been removed from the ctf!`);
                 } catch (error) {
                     console.log(`Error: ${error}`);
                 }
@@ -98,4 +99,36 @@ async function remove(msg, args) {
     }
 }
 
-export {join, reset, leave, remove};
+async function add(msg, args) {
+    const sender = await msg.guild.members.fetch(msg.author.id);
+    const senderRoles = msg.member.roles.cache.map(r => r.name);
+    if (senderRoles.includes("organiser") || sender.permissions.has("ADMINISTRATOR")) {
+        let id = args[0].match(/\d+/)[0];
+        const userExists = await checkUsers(id);
+        const member = await msg.guild.members.fetch(id);
+
+        if (!userExists) {
+            await userProgressSchema.create({
+                _id: id,
+                name: member.user.globalName,
+                currentPhase: 1,
+            });
+            const role = await msg.guild.roles.cache.find((role) => role.name === "ctf");
+        
+            if (role) {
+                try {
+                    await member.roles.add(role);
+                } catch (error) {
+                    console.log(`Error: ${error}`);
+                }
+            }
+            msg.reply("User added successfully. Welcome welcome 👋");
+        } else {
+            msg.reply("User does not exist. No changes were made.");
+        }
+    } else {
+        msg.reply("You do not have the permission to perform this operation.");
+    }
+}
+
+export {join, reset, leave, remove, add };
