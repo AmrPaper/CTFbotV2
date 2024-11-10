@@ -5,7 +5,7 @@ function help(msg) {
     .setTitle("Help!")
     .setDescription("A list of all currently available commands.")
     .setColor("#0099ff")
-    .setFooter({text: "Powered by Paper's PC 🧻",})
+    .setFooter({text: "Powered by Paper 🧻",})
     .addFields({
         name: "!welcome",
         value: "Provides you with a welcome message that contains the outlines of the CTF",
@@ -38,18 +38,16 @@ function help(msg) {
 function welcome(msg) {
     const welcomeMessage = new EmbedBuilder()
     .setTitle("Welcome!")
-    .setDescription("Welcome to Autist Retreat's first CTF! Hope you're having a great day, and get ready to prove yourself in these mystery filled series of challenges!\n\nPlease do try to be respectful throughtout the event and stick to the guidelines outlined below!\n")
+    .setDescription("Welcome to Autist Retreat's first CTF! Hope you're having a great day, and get ready to prove yourself in these mystery filled series of challenges!\nThe format for this CTF is a little odd, due to everyone's different timezones and busy schedules, we've opted to instead make this a more csual and solo experience, where each player is free to start and progress through the challenges as they'd like, this also gives us the opportunity to release challenges periodically whenever enough time is available to work on them, we hope you'll enjoy your time with this mini project!\n\nPlease do try to be respectful throughtout the event and stick to the guidelines outlined below!\n")
     .setColor("#0099ff")
-    .setFooter({text: "Powered by Paper's PC 🧻",})
+    .setFooter({text: "Powered by Paper 🧻",})
     .addFields({
         name: "CTF Guidelines",
         value: `**1.** Participate in the designated channels for general discussions and challenge-specific discussions.\n
-        **2.** Submit flags in the correct format (that being RUECTF={flag-text-here}).\n
-        **3.** Collaborate! 3 heads are better than 1 no?\n
-        **4.** Respect Others' Progress. Communication is allowed between teams though please avoid spoilers and don't share explicit solutions with others, sharing methodology is allowed though!\n
-        **5.** Research on the go! You're allowed to google anything and everything you want, this is not a race, everyone's expected to finish.\n
-        **6.** Hint Usage. Rue can provide you with hints throughout the challenge though if you hit a wall, don't hesitate to contact Paper or another team!\n
-        **7.** Have fun! No need to be competitive approach this as a learning experience!\n`,
+        **2.** Submit flags in the correct format (that being PaperCTF={flag-text-here}).\n
+        **3.** Respect Others' Progress. Communication is allowed between players though please avoid spoilers and don't share explicit solutions with others, sharing methodology is allowed though!\n
+        **4.** Research on the go! You're allowed to google anything and everything you want, this is not a race, everyone's expected to finish.\n
+        **5.** Have fun! No need to be competitive, approach this as a learning experience!\n`,
         inline: false,
     },{
         name:"Need Help?",
@@ -61,10 +59,10 @@ function welcome(msg) {
 
 function intro(msg) {
     const storyIntro = new EmbedBuilder()
-    .setTitle("Quack!")
-    .setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempus enim dictum arcu convallis congue. Integer viverra id magna quis aliquet. Mauris magna ligula, congue ac ante quis, dignissim tempus sapien. Donec egestas justo ex, porttitor bibendum est euismod eu. Phasellus eget ante eget erat finibus cursus a nec lacus. Vestibulum gravida massa sit amet urna finibus pharetra vel non sem. Fusce posuere in nibh interdum semper. Donec tellus tortor, vestibulum vitae vulputate in, egestas in enim. Nam eu libero ut sem consectetur ornare. Mauris iaculis nulla sem, fringilla facilisis risus feugiat vitae. Nulla vel varius libero.")
+    .setTitle("Case Brief: Missing Person - Etti Morales")
+    .setDescription("Detective,\nYou’ve been assigned to investigate the disappearance of Etti Morales, a 21-year-old college student who hasn't been seen for days. Etti was known to stay in her room most of the time, rarely going out. Though when a friend of her's went to visit her room's door was unlocked, and her room was empty, and there's been no sign of her since.\n Her phone is off, and there's no recent activity on her social media. Friends and professors describe her as a quiet, focused student with no history of trouble.\n Your first step is to investigate her dorm room and belongings. As of now, this appears to be a routine missing person’s case, but be thorough—details can easily be overlooked.\n Good luck, Detective.")
     .setColor("#0099ff")
-    .setFooter({text: "Powered by Paper's PC 🧻",});
+    .setFooter({text: "Powered by Paper 🧻",});
 
     msg.channel.send({embeds: [storyIntro]});
 };

@@ -4,12 +4,18 @@ import { checkPhase } from "./progress-tracking.js";
 async function phase1(msg) {
     const challengeTxt = new EmbedBuilder()
     .setTitle("Phase 1")
-    .setDescription("Lorem Ipsum")
+    .setDescription("Room Investigation")
     .setColor("#FFF9FB")
-    .setFooter({text: "Powered by Paper's PC 🧻",})
+    .setFooter({text: "Powered by Paper 🧻",})
     .addFields({
         name: "Data",
-        value: `I've compiled all the available evidence I could get my hands on, you'll find it all here:\n
+        value: `You've interviewed a few of the people on the same floor, and have looked through Etti's room, here's a list of everything you've managed to get your hands on:\n
+        -Notebook Scans of pages from a notebook left open on Etti's desk.\n
+        -Flash Drive containing a zip file\n
+        -Text scan of a letter found under Etti's bed\n
+        -Picture of a sticky note found under Etti's keyboard\n
+        -Interview Transcripts\n
+        You'll find the files in the google drive link below:\n
         ${process.env.PHASE_1_FILES}`
     },);
 
@@ -28,11 +34,10 @@ async function phase2(msg) {
     .setTitle("Phase 2")
     .setDescription("Lorem Ipsum")
     .setColor("#D3D4D9")
-    .setFooter({text: "Powered by Paper's PC 🧻",})
+    .setFooter({text: "Powered by Paper 🧻",})
     .addFields({
         name: "Data",
-        value: `I've compiled all the available evidence I could get my hands on, you'll find it all here:\n
-        ${process.env.PHASE_2_FILES}`
+        value: `Phase 2 is still not ready`
     },);
 
     const phase = await checkPhase(msg);
@@ -50,7 +55,7 @@ async function phase3(msg) {
     .setTitle("Phase 3")
     .setDescription("Lorem Ipsum")
     .setColor("#4B88A2")
-    .setFooter({text: "Powered by Paper's PC 🧻",})
+    .setFooter({text: "Powered by Paper 🧻",})
     .addFields({
         name: "Data",
         value: `I've compiled all the available evidence I could get my hands on, you'll find it all here:\n

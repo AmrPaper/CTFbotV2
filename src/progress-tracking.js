@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import userProgressSchema from "./user-progress-schema.js";
+import { config } from "dotenv";
 
-const flags = {"1": "bruh", "2": "daz", "3": "sus"};
+const flags = JSON.parse(process.env.FLAGS);
 
 async function checkPhase(msg) {
     mongoose.connect(process.env.MONGODB_URI);
