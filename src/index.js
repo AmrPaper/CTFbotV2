@@ -5,7 +5,7 @@ import { submitFlag } from "./progress-tracking.js";
 import { welcome, intro, help, init } from "./commands.js";
 import { phase1, phase2 } from "./challenges.js";
 import { config } from "dotenv";
-const prefix = "!";
+const prefix = "?";
 
 config();
 
