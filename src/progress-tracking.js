@@ -56,7 +56,13 @@ async function submitFlag(msg, args) {
                                     console.log(`Error: ${error}`);
                                     msg.reply("There was an error updating your phase 😭. Please try again!")
                                 };
-                                msg.reply(`You've submitted the correct flag for phase ${stage}! Good Job!`);
+                                msg.channel.send(`You've submitted the correct flag for phase ${stage}! Good Job!`);
+                                try {
+                                    msg.delete();
+                                    console.log("Message successfully deleted!");
+                                } catch (error) {
+                                    console.log(error);
+                                }
                                 return;
                             } else {
                                 msg.reply("Seem you're trying to skip a phase, smh my head 🤦‍♂️.");
