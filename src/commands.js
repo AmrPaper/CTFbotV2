@@ -8,7 +8,11 @@ function help(msg) {
     .setFooter({text: "Powered by Paper 🧻",})
     .addFields({
         name: "?welcome",
-        value: "Provides you with a welcome message that contains the outlines of the CTF",
+        value: "Provides you with a welcome message that contains the outlines of the CTF.",
+        inline: false,
+    },{
+        name: "?intro",
+        value: "Provides you with a brief introduction to the CTF's storyline.",
         inline: false,
     },{
         name: "?join",
