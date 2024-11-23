@@ -7,32 +7,32 @@ function help(msg) {
     .setColor("#0099ff")
     .setFooter({text: "Powered by Paper 🧻",})
     .addFields({
-        name: "?welcome",
+        name: "$welcome",
         value: "Provides you with a welcome message that contains the outlines of the CTF.",
         inline: false,
     },{
-        name: "?intro",
+        name: "$intro",
         value: "Provides you with a brief introduction to the CTF's storyline.",
         inline: false,
     },{
-        name: "?join",
+        name: "$join",
         value: "Registers you as a new member to the CTF!",
         inline: false,
     },{
-        name: "?reset",
+        name: "$reset",
         value: "Resets your progress within the CTF.",
         inline: false,
     },{
-        name: "?leave",
+        name: "$leave",
         value: "Removes you from the CTF.",
         inline: false,
     },{
-        name: "?phase[]",
-        value: "Provides you with the files for the specified challenge, replace the [] with the number of the stage you're currently on.\n For example using !phase2 will give you the files for the second stage!",
+        name: "$phase[]",
+        value: "Provides you with the files for the specified challenge, replace the [] with the number of the stage you're currently on.\n For example using $phase2 will give you the files for the second stage!",
         inline: false,
     },{
-        name: "?submit-flag",
-        value: "Allows you to submit the flag to complete the challenge you're currently on and unlock the next one!\n Use case: !submit-flag flag",
+        name: "$submit-flag",
+        value: "Allows you to submit the flag to complete the challenge you're currently on and unlock the next one!\n Use case: $submit-flag flag",
         inline: false,
     },);
 
@@ -55,7 +55,7 @@ function welcome(msg) {
         inline: false,
     },{
         name:"Need Help?",
-        value:"You can always run the !help command for a list of all the available commands that Rue is equipped with, though if you encounter any problems throughout your play or hit a wall, don't hesitate to contact Paper about anything!"
+        value:"You can always run the $help command for a list of all the available commands that Rue is equipped with, though if you encounter any problems throughout your play or hit a wall, don't hesitate to contact Paper about anything!"
     });
 
     msg.channel.send({embeds: [welcomeMessage]});
