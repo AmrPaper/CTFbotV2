@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import userProgressSchema from "./user-progress-schema.js";
 import { config } from "dotenv";
 config();
+const prefix = "$";
 
 const flags = {"1": process.env.FLAG1};
 
@@ -19,12 +20,12 @@ async function submitFlag(msg, args) {
     let phaseValid = false;
 
     try {
-        if (usrRoles.includes("ctf" == false)) {
+        if (!usrRoles.includes("ctf")) {
             msg.reply("You are not participating in the ongoing CTF, please contact Paper for assistance!");
         } else {
             if (playerName) {
                 if (args.length > 0) {
-                    const usrSubmission = args[0];
+                    const usrSubmission = msg.content.slice(prefix.length + args[0].length).trim();;
 
                     for (const [stage, flag] of Object.entries(flags)) {
                         if (flag == usrSubmission) {
