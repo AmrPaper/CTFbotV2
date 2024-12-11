@@ -37,7 +37,9 @@ async function phase2(msg) {
     .setFooter({text: "Powered by Paper 🧻",})
     .addFields({
         name: "Data",
-        value: `Phase 2 is still not ready`
+        value: `After all of your picking and prodding around Etti's room, and uncovering the project she's been working on, it seems you've caught the attention of someone who seems to be a friend of Etti's, an individual who goes by the name Olive. Olive sent you message with a folder attached, I wonder what it might contain.\n
+        You'll find the files in the google drive link below:\n
+        ${process.env.PHASE_2_FILES}`
     },);
 
     const phase = await checkPhase(msg);

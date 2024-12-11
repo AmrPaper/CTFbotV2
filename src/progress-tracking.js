@@ -4,7 +4,7 @@ import { config } from "dotenv";
 config();
 const prefix = "$";
 
-const flags = {"1": process.env.FLAG1};
+const flags = {"1": process.env.FLAG1, "2":process.env.FLAG2};
 
 async function checkPhase(msg) {
     mongoose.connect(process.env.MONGODB_URI);
@@ -25,7 +25,7 @@ async function submitFlag(msg, args) {
         } else {
             if (playerName) {
                 if (args.length > 0) {
-                    const usrSubmission = msg.content.slice(prefix.length + args[0].length).trim();;
+                    const usrSubmission = msg.content.slice(prefix.length + args[0].length).trim();
 
                     for (const [stage, flag] of Object.entries(flags)) {
                         if (flag == usrSubmission) {
