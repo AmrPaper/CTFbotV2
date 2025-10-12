@@ -7,6 +7,7 @@ import forceJoin from "./commands/slash/forceJoin.js";
 import forceLeave from "./commands/slash/forceLeave.js";
 import removePlayer from "./commands/slash/removePlayer.js";
 import deleteTeam from "./commands/slash/deleteTeam.js";
+import playerInfo from "./commands/slash/playerInfo.js";
 
 config();
 
@@ -117,6 +118,17 @@ const commands = [
                 .setDescription("The role of the target team.")
                 .setRequired(true)
         )
+        .toJSON(),
+    new SlashCommandBuilder()
+        .setName("player-info")
+        .setDescription("Fetches information on the mentioned player.")
+        .setDefaultMemberPermissions("0")
+        .addUserOption(option =>
+            option.setName("player")
+                .setDescription("Target user who's info is to be fetched.")
+                .setRequired(true)
+        )
+        .toJSON()
 ]
 
 export async function registerSlashCommands() {
@@ -161,7 +173,8 @@ const slashHandlers: Record<string, slashHandler> = {
     "delete-team": deleteTeam,
     "force-register-player": forceJoin,
     "force-remove-player": forceLeave,
-    "initialise": initialise
+    "initialise": initialise,
+    "player-info": playerInfo
 }
 
 export async function handleSlashCommands(interaction: ChatInputCommandInteraction): Promise<void> {

@@ -79,7 +79,7 @@ async function leaderboard(msg: Message): Promise<void> {
     }
 }
 
-function formatDuration(durationMs: number) {
+export function formatDuration(durationMs: number) {
   const hours = Math.floor(durationMs / (1000 * 60 * 60));
   const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((durationMs % (1000 * 60)) / 1000);
